@@ -31,7 +31,6 @@ const page = async ({
   const getRecipeDetailUrl = `${process.env.RECIPE_ENDPOINT}/lookup.php?i=${params.id}`;
   const recipeDetail = await getRecipeDetail(getRecipeDetailUrl);
   const ingredients = getIngredients(recipeDetail);
-  console.log(ingredients)
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 p-5'>
       <div>

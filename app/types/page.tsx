@@ -17,7 +17,9 @@ const page = async () => {
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5'>
       {areas.map((area: string, index: number) => (
-        <Link className='shadow-gray-500 bg-gray-300 text-2xl rounded py-10 text-center font-bold hover:bg-blue-500 hover:text-white' 
+        <Link className='shadow-orange-800 text-2xl rounded py-10 text-center font-bold
+        bg-gradient-to-l from-orange-500 via-orange-300 to-orange-500 
+        hover:from-orange-300 hover:via-orange-500 hover:to-orange-300 hover:text-white' 
           key={index} href={`/types/${area}`}
         >
           <div>{area}</div>

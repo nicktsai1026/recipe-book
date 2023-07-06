@@ -52,7 +52,7 @@ const page = async ({
           <p className='mb-1'>Ingredients: </p>
           {ingredients.map((ingredient, index) => (
             <span key={index} 
-              className='bg-blue-500 text-white px-2 py-1 rounded inline-block mr-2 mb-1'
+              className='bg-orange-300 text-white px-2 py-1 rounded inline-block mr-2 mb-1'
             >
               {ingredient}
             </span>

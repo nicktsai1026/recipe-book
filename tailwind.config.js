@@ -8,10 +8,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'homepage': "url('/homepage.jpg')",
       },
+      colors: {
+        primary: '#FFA458',
+        secondary: '#BA3B0A'
+      }
     },
   },
   plugins: [],

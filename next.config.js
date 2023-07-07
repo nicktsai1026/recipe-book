@@ -10,6 +10,12 @@ const nextConfig = {
         hostname: "www.themealdb.com",
         port: "",
         pathname: "/images/media/meals/**"
+      },
+      {
+        protocol: 'https',
+        hostname: "www.themealdb.com",
+        port: "",
+        pathname: "/images/category/**"
       }
     ]
   }

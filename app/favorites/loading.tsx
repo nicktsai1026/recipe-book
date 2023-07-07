@@ -1,7 +1,7 @@
 
 const loading = () => {
   return (
-    <div>Homepage loading...</div>
+    <div>loading list of favorites...</div>
   )
 }
 

@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'homepage': "url('/homepage.jpg')",
+        'homepage-types': "url('/homepage_types.jpg')",
+        "homepage-categories": "url('/homepage_categories.jpg')"
       },
       colors: {
         primary: '#FFA458',

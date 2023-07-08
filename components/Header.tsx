@@ -1,5 +1,7 @@
 "use client";
 
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Kaushan_Script } from 'next/font/google'
@@ -16,16 +18,13 @@ const Header = () => {
   } else {
     route = area ? `/types` : `/categories`;
   }
-
+  const navLinkClass = "bg-orange-400 text-white hover:bg-orange-500 py-2 px-3 text-sm rounded font-bold flex items-center";
+  
   return (
     <div className="p-5 flex items-center justify-between bg-orange-100">
       { (area || category ) && 
-        <Link href={route} 
-          className="bg-orange-400 text-white p-4 text-sm rounded font-bold flex items-center"
-        > 
-          <svg className="w-4 h-4 text-white mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13"/>
-          </svg>
+        <Link href={route} className={navLinkClass}> 
+          <NavigateBeforeIcon />
           {recipeId ? `${area || category} Recipes` : `Recipe ${area || category}`}
         </Link>
       }
@@ -38,7 +37,8 @@ const Header = () => {
       </div>
       <div>
         <Link href="/favorites">
-          <h1 className="bg-orange-400 text-white hover:bg-secondary p-3 text-sm rounded font-bold items-center">
+          <h1 className={navLinkClass}>
+            <FavoriteIcon className="mr-1" />
             My Favorites
           </h1>
         </Link>

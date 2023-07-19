@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'homepage-types': "url('/homepage_types.jpg')",
+        'homepage-areas': "url('/homepage_areas.jpg')",
         "homepage-categories": "url('/homepage_categories.jpg')"
       },
       colors: {

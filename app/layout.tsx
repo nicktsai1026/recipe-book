@@ -5,6 +5,7 @@ const merriweather = Merriweather({
   subsets: ['latin'],
   weight: '400'
 })
+import AuthProvider from '@/components/AuthProvider';
 
 export const metadata = {
   title: 'Recipe Book',
@@ -19,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={merriweather.className}>
-        <Header />
-        {children}
+        <AuthProvider>
+          <Header />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

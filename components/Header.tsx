@@ -3,23 +3,32 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Link from "next/link";
+import AuthenticationForm from './AuthenticationForm';
 import { useParams } from "next/navigation";
-import { Kaushan_Script } from 'next/font/google'
+import { Kaushan_Script } from 'next/font/google';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+
 const kaushan = Kaushan_Script({
   subsets: ['latin'],
   weight: '400'
 });
 
 const Header = () => {
+  const { data: session } = useSession();
+  const [openForm, setOpenForm] = useState(false);
   const { type: area, category, id: recipeId } = useParams();
-  let route: string = "";
-  if (recipeId) {
-    route = area ? `/types/${area}/` : `/categories/${category}/`;
-  } else {
-    route = area ? `/types` : `/categories`;
+  const navLinkClass = "bg-orange-400 text-white hover:bg-orange-500 py-2 px-3 text-sm rounded font-bold flex items-center cursor-pointer";
+  const route: string = recipeId ? area ? `/areas/${area}` : `/categories/${category}` : category ? `/categories` : `/areas`;
+
+  const FavoriteBtn = () => {
+    return (
+      <div className={navLinkClass}>
+        <FavoriteIcon className="mr-1" /> Favorites
+      </div>
+    )
   }
-  const navLinkClass = "bg-orange-400 text-white hover:bg-orange-500 py-2 px-3 text-sm rounded font-bold flex items-center";
-  
+
   return (
     <div className="p-5 flex items-center justify-between bg-orange-100">
       { (area || category ) && 
@@ -35,13 +44,16 @@ const Header = () => {
           </h1>
         </Link>
       </div>
-      <div>
-        <Link href="/favorites">
-          <h1 className={navLinkClass}>
-            <FavoriteIcon className="mr-1" />
-            My Favorites
-          </h1>
-        </Link>
+      <div className='user-section'>
+        { session ? 
+          <Link href="/favorites">
+            <FavoriteBtn />
+          </Link> :
+          <div onClick={() => setOpenForm(true)}>
+            <FavoriteBtn />
+          </div>
+        }
+        <AuthenticationForm isOpen={openForm} setIsOpen={setOpenForm}/>
       </div>
     </div>
   )

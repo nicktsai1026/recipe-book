@@ -20,7 +20,7 @@ const page = async () => {
         <Link className='shadow-orange-800 text-2xl rounded py-10 text-center font-bold
         bg-gradient-to-l from-orange-500 via-orange-300 to-orange-500 
         hover:from-orange-300 hover:via-orange-500 hover:to-orange-300 hover:text-white' 
-          key={index} href={`/types/${area}`}
+          key={index} href={`/areas/${area}`}
         >
           <div>{area}</div>
         </Link>

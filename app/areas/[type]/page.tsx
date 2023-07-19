@@ -18,7 +18,7 @@ const page = async ({
   const getRecipesUrl = `${process.env.RECIPE_ENDPOINT}/filter.php?a=${params.type}`;
   const recipes = await getRecipes(getRecipesUrl);
   return (
-    <RecipeList recipes={recipes.meals} route={"/types/" + params.type} />
+    <RecipeList recipes={recipes.meals} route={"/areas/" + params.type} />
   )
 }
 

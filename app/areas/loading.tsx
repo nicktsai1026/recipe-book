@@ -1,7 +1,7 @@
 
 const loading = () => {
   return (
-    <div>loading list of types...</div>
+    <div>loading list of Areas...</div>
   )
 }
 

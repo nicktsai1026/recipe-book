@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-interface typesProps {
+interface areasProps {
   type: string;
   id: string;
 }
@@ -26,7 +26,7 @@ const getIngredients = (details: any): string[] => {
 const page = async ({
   params
 }: {
-  params: typesProps
+  params: areasProps
 }) => {
   const getRecipeDetailUrl = `${process.env.RECIPE_ENDPOINT}/lookup.php?i=${params.id}`;
   const recipeDetail = await getRecipeDetail(getRecipeDetailUrl);

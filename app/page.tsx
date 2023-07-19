@@ -7,11 +7,11 @@ const Layer = ({ style }: { style: string }) => {
 export default function Home() {
   return (
     <div className="homepage-container">
-      <div className='homepage-types-section relative w-full h-screen bg-homepage-types bg-cover'>
+      <div className='homepage-areas-section relative w-full h-screen bg-homepage-areas bg-cover'>
         <Layer style='bg-white' />
         <div className="w-4/5 absolute text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <h1 className='text-5xl my-8'>Explore food from around the world</h1>
-          <Link href="/types" className='shadow-orange-100 bg-orange-400 rounded text-xl py-2 px-4 cursor-pointer hover:bg-secondary hover:text-white'>
+          <Link href="/areas" className='shadow-orange-100 bg-orange-400 rounded text-xl py-2 px-4 cursor-pointer hover:bg-secondary hover:text-white'>
             List of Cuisines
           </Link>
         </div>

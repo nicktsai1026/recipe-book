@@ -23,7 +23,7 @@ const getIngredients = (details: any): string[] => {
     .filter((ingredient) => ingredient);
 }
 
-const page = async ({
+const Page = async ({
   params
 }: {
   params: areasProps
@@ -74,4 +74,4 @@ const page = async ({
   )
 }
 
-export default page
+export default Page

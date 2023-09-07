@@ -18,13 +18,14 @@ const Header = () => {
   const { data: session } = useSession();
   const [openForm, setOpenForm] = useState(false);
   const { type: area, category, id: recipeId } = useParams();
-  const navLinkClass = "bg-orange-400 text-white hover:bg-orange-500 py-2 px-3 text-sm rounded font-bold flex items-center cursor-pointer";
+  const navLinkClass = "bg-orange-400 text-white hover:bg-orange-500 py-2 px-3 text-sm rounded font-bold flex items-center cursor-pointer text-xs sm:text-sm";
   const route: string = recipeId ? area ? `/areas/${area}` : `/categories/${category}` : category ? `/categories` : `/areas`;
 
   const FavoriteBtn = () => {
     return (
       <div className={navLinkClass}>
-        <FavoriteIcon className="mr-1" /> Favorites
+        <FavoriteIcon className="mr-0 sm:mr-1" /> 
+        <span className='hidden sm:block'>Favorites</span>
       </div>
     )
   }
@@ -34,12 +35,14 @@ const Header = () => {
       { (area || category ) && 
         <Link href={route} className={navLinkClass}> 
           <NavigateBeforeIcon />
-          {recipeId ? `${area || category} Recipes` : `Recipe ${area || category}`}
+          <span className='hidden sm:block'>
+            {recipeId ? `${area || category} Recipes` : `Recipe ${area || category}`}
+          </span>
         </Link>
       }
       <div className={kaushan.className}>
         <Link href="/">
-          <h1 className="text-primary font-bold text-4xl text-center">
+          <h1 className="text-primary font-bold text-3xl sm:text-4xl text-center">
             Recipe Book
           </h1>
         </Link>
@@ -53,7 +56,7 @@ const Header = () => {
             <FavoriteBtn />
           </div>
         }
-        <AuthenticationForm isOpen={openForm} setIsOpen={setOpenForm}/>
+        <AuthenticationForm isOpen={openForm} redirect={true} setIsOpen={setOpenForm}/>
       </div>
     </div>
   )

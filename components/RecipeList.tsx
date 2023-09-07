@@ -67,7 +67,7 @@ const RecipeList = ({
           </div>
         )
       })}
-      <AuthenticationForm isOpen={openForm} setIsOpen={setOpenForm}/>
+      <AuthenticationForm isOpen={openForm} redirect={false} setIsOpen={setOpenForm}/>
     </div>
   )
 }

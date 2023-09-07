@@ -1,33 +1,38 @@
-import connectMongoDB from "@/libs/mongodb";
-import User from "@/models/User";
 import { NextResponse } from "next/server";
 import * as bcrypt from 'bcrypt-ts';
+import prisma from "@/libs/prismadb";
 
 export async function POST(request: Request) {
   try {
-    await connectMongoDB();
-    const { username, email, password } = await request.json();
-    const existedUser = await User.findOne({ email });
+    const { email, password } = await request.json();
+    const existedUser = await prisma.user.findUnique({
+      where: {
+        email: email
+      }
+    });
 
     if (existedUser) {
-      return NextResponse.json({ error: "Email already exists" }, { status: 400 });
+      throw new Error("Email already exists");
     }
 
     const hashedPassword = await bcrypt.hashSync(password, 10);
-    const newUser = await User.create({ 
-      username: username, 
-      email: email, 
-      password: hashedPassword 
+    const newUser = await prisma.user.create({
+      data: {
+        email: email,
+        password: hashedPassword,
+        username: email.split('@')[0]
+      }
     });
-    return NextResponse.json(newUser, { status: 201 });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    // console.log("newUser: ", newUser);
+    return NextResponse.json(newUser, { status: 200 });
+
+  } catch (error: any) {
+    console.log("Sign up post api error: ", error);
+    return NextResponse.json({ error: { type: "email", message: error.message }}, { status: 400 });
   }
 }
 
 export async function GET(request: Request) {
-  await connectMongoDB();
-	const users = await User.find();
-	return NextResponse.json({ users });
+  const users = await prisma.user.findMany();
+	return NextResponse.json({ users }, { status: 200 });
 }

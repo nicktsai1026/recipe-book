@@ -10,7 +10,7 @@ const getRecipes = async (endpoint: string) => {
   }
 }
 
-const page = async ({ 
+const Page = async ({ 
   params 
 } : {
   params: { type: string };
@@ -22,4 +22,4 @@ const page = async ({
   )
 }
 
-export default page
+export default Page

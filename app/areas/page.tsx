@@ -11,7 +11,7 @@ const fetchRecipesAreas = async (endpoint: string) => {
   }
 };
 
-const page = async () => {
+const Page = async () => {
   const recipeAreaUrl: string = `${process.env.RECIPE_ENDPOINT}/list.php?a=list`;
   const areas = await fetchRecipesAreas(recipeAreaUrl);
   return (
@@ -29,4 +29,4 @@ const page = async () => {
   )
 }
  
-export default page
+export default Page

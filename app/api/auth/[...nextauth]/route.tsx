@@ -1,42 +1,53 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from '@/models/User';
 import * as bcrypt from 'bcrypt-ts';
-import connectMongoDB from "@/libs/mongodb";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/libs/prismadb";
 
 const handler = NextAuth({
-  session: {
-    strategy: 'jwt',
-    maxAge: 365 * 24 * 60 * 60 // 1 year
-  },
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "someone@example.com" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Email and password are required");
+        }
+
         const { email, password } = credentials as { email: string, password: string };
-        await connectMongoDB();
-        
-        const user = await User.findOne({ email });
+        const user = await prisma.user.findUnique({
+          where: {
+            email: email
+          }
+        });
 
         if (!user) {
-          throw new Error("User not found");
+          throw new Error("Email");
         }
        
         const isMatch = await bcrypt.compareSync(password, user.password);
         if (!isMatch) {
-          throw new Error("Password is incorrect");
-        } else {
-          return user;
+          throw new Error("Password");
         }
+
+        return user;
       }
     })
   ],
+  session: {
+    strategy: 'jwt',
+    maxAge: 365 * 24 * 60 * 60 // 1 year
+  },
+  jwt:{
+    secret: process.env.NEXTAUTH_JWT_SECRET,
+  },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/login'
+    signIn: '/users'
   },
   callbacks: {
     async jwt ({ token, account, user }) {
